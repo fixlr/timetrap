@@ -37,7 +37,7 @@ begin
     s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
     s.require_paths = ["lib"]
     s.bindir = "bin"
-    s.executables = ['t']
+    s.executables = ['timetrap']
     s.summary = %q{Command line time tracker}
     s.add_dependency("sequel", ">= 3.9.0")
     s.add_dependency("sqlite3", "~> 1.3.3")

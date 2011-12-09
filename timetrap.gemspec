@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.default_executable = %q{t}
   s.description = %q{Command line time tracker}
   s.email = %q{sgrock@gmail.com}
-  s.executables = ["t"]
+  s.executables = ["timetrap"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION.yml",
-    "bin/dev_t",
-    "bin/t",
+    "bin/dev_timetrap",
+    "bin/timetrap",
     "lib/timetrap.rb",
     "lib/timetrap/cli.rb",
     "lib/timetrap/config.rb",

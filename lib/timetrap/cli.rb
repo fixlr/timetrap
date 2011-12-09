@@ -10,33 +10,33 @@ Timetrap - Simple Time Tracking
 
 Usage: #{File.basename $0} COMMAND [OPTIONS] [ARGS...]
 
-COMMAND can be abbreviated. For example `t in` and `t i` are equivalent.
+COMMAND can be abbreviated. For example `timetrap in` and `timetrap i` are equivalent.
 
 COMMAND is one of:
 
   * archive - Move entries to a hidden sheet (by default named '_[SHEET]') so
       they're out of the way.
-    usage: t archive [--start DATE] [--end DATE] [SHEET]
+    usage: timetrap archive [--start DATE] [--end DATE] [SHEET]
     -s, --start <date:qs>     Include entries that start on this date or later
     -e, --end <date:qs>       Include entries that start on this date or earlier
 
   * backend - Open an sqlite shell to the database.
-    usage: t backend
+    usage: timetrap backend
 
   * configure - Write out a YAML config file. Print path to config file.  The
       file may contain ERB.
-    usage: t configure
+    usage: timetrap configure
     Currently supported options are:
       round_in_seconds:       The duration of time to use for rounding with
                               the -r flag
       database_file:          The file path of the sqlite database
       append_notes_delimiter: delimiter used when appending notes via
-                              t edit --append
+                              timetrap edit --append
 
   * display - Display the current timesheet or a specific. Pass `all' as SHEET
       to display all unarchived sheets or `full' to display archived and
       unarchived sheets.
-    usage: t display [--ids] [--start DATE] [--end DATE] [--format FMT] [SHEET | all | full]
+    usage: timetrap display [--ids] [--start DATE] [--end DATE] [--format FMT] [SHEET | all | full]
     -v, --ids                 Print database ids (for use with edit)
     -s, --start <date:qs>     Include entries that start on this date or later
     -e, --end <date:qs>       Include entries that start on this date or earlier
@@ -47,7 +47,7 @@ COMMAND is one of:
                               distribution.
 
   * edit - Alter an entry's note, start, or end time. Defaults to the active entry.
-    usage: t edit [--id ID] [--start TIME] [--end TIME] [--append] [NOTES]
+    usage: timetrap edit [--id ID] [--start TIME] [--end TIME] [--append] [NOTES]
     -i, --id <id:i>           Alter entry with id <id> instead of the running entry
     -s, --start <time:qs>     Change the start time to <time>
     -e, --end <time:qs>       Change the end time to <time>
@@ -57,35 +57,35 @@ COMMAND is one of:
     -m, --move <sheet>        Move to another sheet
 
   * in - Start the timer for the current timesheet.
-    usage: t in [--at TIME] [NOTES]
+    usage: timetrap in [--at TIME] [NOTES]
     -a, --at <time:qs>        Use this time instead of now
 
   * kill - Delete a timesheet or an entry.
-    usage: t kill [--id ID] [TIMESHEET]
+    usage: timetrap kill [--id ID] [TIMESHEET]
     -i, --id <id:i>           Alter entry with id <id> instead of the running entry
 
   * list - Show the available timesheets.
-    usage: t list
+    usage: timetrap list
 
   * now - Show all running entries.
-    usage: t now
+    usage: timetrap now
 
   * out - Stop the timer for the a timesheet.
-    usage: t out [--at TIME] [TIMESHEET]
+    usage: timetrap out [--at TIME] [TIMESHEET]
     -a, --at <time:qs>        Use this time instead of now
 
   * resume - Start the timer for the current time sheet with the same note as
       the last entry on the sheet. If there is no entry it takes the passed note.
-    usage: t resume [--at TIME] [NOTES]
+    usage: timetrap resume [--at TIME] [NOTES]
     -a, --at <time:qs>        Use this time instead of now
 
   * sheet - Switch to a timesheet creating it if necessary. When no sheet is
       specified list all sheets. The special sheetname '-' will switch to the
       last active sheet.
-    usage: t sheet [TIMESHEET]
+    usage: timetrap sheet [TIMESHEET]
 
   * week - Shortcut for display with start date set to monday of this week.
-    usage: t week [--ids] [--end DATE] [--format FMT] [SHEET | all]
+    usage: timetrap week [--ids] [--end DATE] [--format FMT] [SHEET | all]
 
   OTHER OPTIONS
 
@@ -97,16 +97,16 @@ COMMAND is one of:
   EXAMPLES
 
   # create the "MyTimesheet" timesheet
-  $ t sheet MyTimesheet
+  $ timetrap sheet MyTimesheet
 
   # check in 5 minutes ago with a note
-  $ t in --at '5 minutes ago' doing some stuff
+  $ timetrap in --at '5 minutes ago' doing some stuff
 
   # check out
-  $ t out
+  $ timetrap out
 
   # view current timesheet
-  $ t display
+  $ timetrap display
 
   Submit bugs and feature requests to http://github.com/samg/timetrap/issues
     EOF

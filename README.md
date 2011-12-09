@@ -11,23 +11,23 @@ To install:
 
     $ gem install timetrap
 
-This will place a ``t`` executable in your path.
+This will place a ``timetrap`` executable in your path.
 
 ### Basic Usage
 
     $ # get help
-    $ t --help
+    $ timetrap --help
 
 Timetrap maintains a list of *timesheets*.
 
     $ # create the "coding" timesheet
-    $ t sheet coding
+    $ timetrap sheet coding
     Switching to sheet coding
 
 All commands can be abbreviated.
 
-    $ # same as "t sheet coding"
-    $ t s coding
+    $ # same as "timetrap sheet coding"
+    $ timetrap s coding
     Switching to sheet coding
 
 Each timesheet contains *entries*.  Each entry has a start and end time, and a
@@ -37,12 +37,12 @@ running.
 You check in to the current sheet with the `in` command.
 
     $ # check in with "document timetrap" note
-    $ t in document timetrap
+    $ timetrap in document timetrap
     Checked into sheet "coding".
 
 Commands like `display` and `now` will show you the running entry.
 
-    $ t display
+    $ timetrap display
     Timesheet: coding
         Day                Start      End        Duration   Notes
         Sun Nov 28, 2010   12:26:10 -            0:00:03    document timetrap
@@ -50,25 +50,25 @@ Commands like `display` and `now` will show you the running entry.
         ---------------------------------------------------------
         Total                                    0:00:03
 
-    $ t now
+    $ timetrap now
     *coding: 0:01:02 (document timetrap)
 
 If you make a mistake use the `edit` command.
 
     $ # edit the running entry's note
-    $ t edit writing readme
+    $ timetrap edit writing readme
     editing entry #42
 
 You check out with the `out` command.
 
-    $ t out
+    $ timetrap out
     Checked out of sheet "coding"
 
 You can edit entries that aren't running using `edit`'s `--id` or `-i` flag.
-`t display --ids`  (or `t display -v`) will tell you the ids.
+`timetrap display --ids`  (or `timetrap display -v`) will tell you the ids.
 
     $ # note id column in output
-    $ t d -v
+    $ timetrap d -v
     Timesheet: coding
     Id  Day                Start      End        Duration   Notes
     43  Sun Nov 28, 2010   12:26:10 - 13:41:03   1:14:53    writing readme
@@ -77,10 +77,10 @@ You can edit entries that aren't running using `edit`'s `--id` or `-i` flag.
         Total                                    1:14:53
 
     $ # -i43 to edit entry 43
-    $ t e -i43 --end "2010-11-28 13:45"
+    $ timetrap e -i43 --end "2010-11-28 13:45"
     editing entry #43
 
-    $ t d
+    $ timetrap d
     Timesheet: coding
         Day                Start      End        Duration   Notes
         Sun Nov 28, 2010   12:26:10 - 13:45:00   1:18:50    writing readme
@@ -98,21 +98,21 @@ as a natural language time.
 This is very handy if you start working and forget to start Timetrap.  You can
 check in 5 minutes ago using `in`'s `--at` flag.
 
-    $ t in --at "5 minutes ago"
+    $ timetrap in --at "5 minutes ago"
 
 Command line flags also have short versions.
 
     $ # equivilent to the command above
-    $ t i -a "5 minutes ago"
+    $ timetrap i -a "5 minutes ago"
 
 You can consult the Chronic gem (http://chronic.rubyforge.org/) for a full
 list of parsable time formats, but all of these should work.
 
-    $ t out --at "in 30 minutes"
-    $ t edit --start "last monday at 10:30am"
-    $ t edit --end "tomorrow at noon"
-    $ t display --start "10am" --end "2pm"
-    $ t i -a "2010-11-29 12:30:00"
+    $ timetrap out --at "in 30 minutes"
+    $ timetrap edit --start "last monday at 10:30am"
+    $ timetrap edit --end "tomorrow at noon"
+    $ timetrap display --start "10am" --end "2pm"
+    $ timetrap i -a "2010-11-29 12:30:00"
 
 ### Output Formats
 
@@ -123,9 +123,9 @@ Timetrap has built-in support for 6 output formats.
 These are **text**, **csv**, **ical**, **json**, **factor** and **ids**
 
 The default is a plain **text** format.  (You can change the default format using
-`t configure`).
+`timetrap configure`).
 
-    $ t display
+    $ timetrap display
     Timesheet: coding
         Day                Start      End        Duration   Notes
         Mon Apr 13, 2009   15:46:51 - 17:03:50   1:16:59    improved display functionality
@@ -141,7 +141,7 @@ The default is a plain **text** format.  (You can change the default format usin
 
 The **CSV** formatters is easy to import into a spreadsheet.
 
-    $ t display --format csv
+    $ timetrap display --format csv
     start,end,note,sheet
     "2010-08-21 11:19:05","2010-08-21 12:12:04","migrated site","coding"
     "2010-08-21 12:44:09","2010-08-21 12:48:46","DNS emails and install email packages","coding"
@@ -155,13 +155,13 @@ The **CSV** formatters is easy to import into a spreadsheet.
 **iCal** format lets you get your time into your favorite calendar program
 (remember commands can be abbreviated).
 
-    $ t d -f ical > MyTimeSheet.ics
+    $ timetrap d -f ical > MyTimeSheet.ics
 
 The **ids** formatter is provided to facilitate scripting within timetrap.  It only
 outputs numeric id for the entries.  This is handy if you want to move all entries
 from one sheet to another sheet.  You could do something like this:
 
-    $ for id in `t display sheet1 -f ids`; do t edit --id $id --move sheet2; done
+    $ for id in `timetrap display sheet1 -f ids`; do t edit --id $id --move sheet2; done
     editing entry #36
     editing entry #37
     editing entry #44
@@ -169,7 +169,7 @@ from one sheet to another sheet.  You could do something like this:
 
 A *json* formatter is provided because hackers love json.
 
-    $ t d -fjson
+    $ timetrap d -fjson
 
 The *factor* formatter is like the default *text* formatter, except it reads special
 notes in your entry descriptions, and multiplies the entry's duration by them.
@@ -177,7 +177,7 @@ A note like *f:2* will multiply the entry's duration by two in the output.
 See https://github.com/samg/timetrap/issues#issue/13 for more details.
 
     $ # note durations are multiplications of start and end times, based on notes
-    $ t d -ffactor
+    $ timetrap d -ffactor
     Timesheet: nopoconi
         Day                Start      End        Duration   Notes
         Mon Mar 07, 2011   19:56:06 - 20:18:37   0:22:31    merge factor in timetrap, f:3
@@ -205,8 +205,8 @@ entries.
 
 To ensure that timetrap can find your formatter put it in
 `~/.timetrap/formatters/notes.rb`.  The filename should be the same as the
-string you will pass to `t d --format` to invoke it.  If you want to put your
-formatter in a different place you can run `t configure` and edit the
+string you will pass to `timetrap d --format` to invoke it.  If you want to put
+your formatter in a different place you can run `timetrap configure` and edit the
 `formatter_search_paths` option.
 
 All timetrap formatters live under the namespace `Timetrap::Formatters` so
@@ -215,7 +215,7 @@ define your class like this:
     class Timetrap::Formatters::Notes
     end
 
-When `t display` is invoked, timetrap initializes a new instance of the
+When `timetrap display` is invoked, timetrap initializes a new instance of the
 formatter passing it an Array of entries.  It then calls `#output` which should
 return a string to be printed to the screen.
 
@@ -234,7 +234,7 @@ method for the class.  Something like this:
 
 Now when I invoke it:
 
-    $ t d -f notes
+    $ timetrap d -f notes
     working on issue #123
     working on issue #234
 
@@ -242,14 +242,14 @@ Commands
 --------
 **archive**
   Archives the selected entries (by moving them to a sheet called ``_[SHEET]``)
-  These entries can be seen by running ``t display _[SHEET]``.
-  usage: ``t archive [--start DATE] [--end DATE] [SHEET]``
+  These entries can be seen by running ``timetrap display _[SHEET]``.
+  usage: ``timetrap archive [--start DATE] [--end DATE] [SHEET]``
 
 **backend**
   Run an interactive database session on the timetrap database. Requires the
   sqlite3 command.
 
-  usage: ``t backend``
+  usage: ``timetrap backend``
 
 **configure**
   Creates a config file at  ``~/.timetrap.yml`` or ``ENV['TIMETRAP_CONFIG_FILE']`` if
@@ -257,7 +257,7 @@ Commands
   configuration options preserving any user overrides. Prints path to config
   file.  This file may contain ERB.
 
-  usage: ``t configure``
+  usage: ``timetrap configure``
 
 **display**
   Display a given timesheet. If no timesheet is specified, show the current
@@ -273,63 +273,63 @@ Commands
   Display also allows the use of a ``--round`` or ``-r`` flag which will round
   all times in the output. See global options below.
 
-  usage: ``t display [--ids] [--round] [--start DATE] [--end DATE] [--format FMT] [SHEET | all | full]``
+  usage: ``timetrap display [--ids] [--round] [--start DATE] [--end DATE] [--format FMT] [SHEET | all | full]``
 
 **edit**
   Inserts a note associated with the an entry in the timesheet, or edits the
   start or end times.  Defaults to the current time although an ``--id`` flag can
   be passed with the entry's id (see display.)
 
-  usage: ``t edit [--id ID] [--start TIME] [--end TIME] [--append] [NOTES]``
+  usage: ``timetrap edit [--id ID] [--start TIME] [--end TIME] [--append] [NOTES]``
 
 **in**
   Start the timer for the current timesheet. Must be called before out.  Notes
   may be specified for this period. This is exactly equivalent to
-  ``t in; t edit NOTES``. Accepts an optional --at flag.
+  ``timetrap in; timetrap edit NOTES``. Accepts an optional --at flag.
 
-  usage: ``t in [--at TIME] [NOTES]``
+  usage: ``timetrap in [--at TIME] [NOTES]``
 
 **kill**
   Delete a timesheet or an entry.  Entry's are referenced using an ``--id``
   flag (see display).  Sheets are referenced by name.
 
-  usage: ``t kill [--id ID] [TIMESHEET]``
+  usage: ``timetrap kill [--id ID] [TIMESHEET]``
 
 **list**
   List the available timesheets.
 
-  usage: ``t list``
+  usage: ``timetrap list``
 
 **now**
   Print a description of all running entries.
 
-  usage: ``t now``
+  usage: ``timetrap now``
 
 **out**
   Stop the timer for the current timesheet. Must be called after in. Accepts an
   optional --at flag. Accepts an optional TIMESHEET name to check out of a
   running, non-current sheet.
 
-  usage: ``t out [--at TIME] [TIMESHEET]``
+  usage: ``timetrap out [--at TIME] [TIMESHEET]``
 
 **resume**
   Start the timer for the current timesheet with the same notes as the last entry.
   If there is no last entry the new one has blank notes ore uses the optional
   NOTES parameter.
 
-  usage: ``t resume [--at TIME] [NOTES]``
+  usage: ``timetrap resume [--at TIME] [NOTES]``
 
 **sheet**
   Switch to a timesheet creating it if necessary. The default timesheet is
   called "default". When no sheet is specified list all existing sheets.
   The special timesheet name '-' will switch to the last active sheet.
 
-  usage: ``t sheet [TIMESHEET]``
+  usage: ``timetrap sheet [TIMESHEET]``
 
 **week**
   Shortcut for display with start date set to monday of this week
 
-  usage: ``t week [--ids] [--end DATE] [--format FMT] [TIMESHEET | all]``
+  usage: ``timetrap week [--ids] [--end DATE] [--format FMT] [TIMESHEET | all]``
 
 Global Options
 --------
@@ -353,7 +353,7 @@ Configuration
 Configuration of TimeTrap's behavior can be done through an ERB interpolated
 YAML config file.
 
-See ``t configure`` for details.  Currently supported options are:
+See ``timetrap configure`` for details.  Currently supported options are:
 
   **round_in_seconds**: The duration of time to use for rounding with the -r flag
 
